@@ -1,6 +1,6 @@
 # ZCoder
 
-ZCoder is a comprehensive platform designed to facilitate collaborative learning among users interested in coding and problem-solving. It allows users to create profiles, engage in collaborative learning, chat with each other, discuss problem-solving techniques, share interesting insights, and participate in community discussions. Additionally, it includes a contest calendar page where users can stay updated on upcoming contests.
+ZCoder is a comprehensive platform designed to facilitate collaborative learning among users interested in coding and problem-solving and wants to enhance their skills. It allows users to create profiles, engage in collaborative learning, chat with each other, discuss problem-solving techniques, share interesting insights, and participate in community discussions. Additionally, it includes a contest calendar page where users can stay updated on upcoming contests.
 
 ## Table of Contents
 
