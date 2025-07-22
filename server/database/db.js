@@ -9,9 +9,7 @@ const URL=`mongodb://${user}:${pass}@ac-dr7qtrn-shard-00-00.nproz9z.mongodb.net:
 const  connection = async () =>{
     try{
         // using function to connect url id the url needed and useunified topology is detailed in the end
-         await mongoose.connect("mongodb+srv://nikurajj22:"
-   +process.env.PASSWORD+
-   "@cluster0.tgoffv8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",{useUnifiedTopology: true });
+         await mongoose.connect("mongodb+srv://nikurajj22:jUbd34DlRZbhdz8V@xcode.c5dy87q.mongodb.net/?retryWrites=true&w=majority&appName=Xcode",{useUnifiedTopology: true });
          console.log("we rolling database connected");
     }catch(error){
         console.log(error.message);

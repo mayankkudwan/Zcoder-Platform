@@ -29,18 +29,25 @@ function Messages({person,conversation}){
         const scrollRef=useRef();
     const {account,socket}=useContext(AccountContext);
     
-    useEffect(()=>{
-        socket.current.on('getMessage',data=>{
+    useEffect(() => {
+        const handleIncoming = (data) => {
             setIncomingMessage({
                 ...data,
                 createdAt: Date.now()
-            })
-        })
-    }, [])
+            });
+        };
+    
+        socket.current.on('getMessage', handleIncoming);
+    
+        return () => {
+            socket.current.off('getMessage', handleIncoming); // ✅ Cleanup when component unmounts
+        };
+    }, []);
 
     useEffect(()=>{
         const getMessageDetails =async ()=>{
            // console.log(conversation);
+           await new Promise(res => setTimeout(res, 100));
             let data = await getMessages(conversation._id);
             // console.log("khohkhkhkhkhkhkhk");
             // console.log(conversation._id);
@@ -50,7 +57,7 @@ function Messages({person,conversation}){
             //console.log(messages);
         }
         getMessageDetails(); 
-    },[person._id,conversation._id,newMessageFlag]);
+    },[person._id,conversation._id,newMessageFlag,setMessages]);
 
     useEffect(()=>{
         scrollRef.current?.scrollIntoView({transition:'smooth'})//scrollRef.current works as document.getElementById type
@@ -68,16 +75,16 @@ function Messages({person,conversation}){
         if(code===13){
             let message={
                 senderId: account.sub,
-                receieverId: receiverId,
+                receiverId: receiverId,
                 conversationId:conversation._id,//we are getting an error here cause the getconversation in api.js is returning a null object ddkkfk
                 type: 'text',
                 text: value
             };
             console.log(message);
             //now we send this message to our database
-
-            socket.current.emit('sendMessage',message)
             await newMessage(message);
+            socket.current.emit('sendMessage',message)
+            
 
             setValue('');
             setNewMessageFlag(prev =>!prev); 
