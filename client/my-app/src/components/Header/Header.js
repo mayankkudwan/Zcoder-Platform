@@ -8,7 +8,7 @@ const HeaderContainer = styled(AppBar)({
   top: 0,
   left: 0,
   width: '100%',
-  padding: '0vh 15vh', // Converted 20px and 100px to vh
+  padding: '0vh 15vh',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -18,7 +18,7 @@ const HeaderContainer = styled(AppBar)({
 });
 
 const Logo = styled('img')({
-  width: '13vh', // Converted 85px to vh
+  width: '13vh',
   userSelect: 'none',
   height: '10vh'
 });
@@ -27,15 +27,15 @@ const NavigationButton = styled(Button)({
   fontSize: '1.1em',
   color: 'white',
   fontWeight: 500,
-  marginLeft: '6vh', // Converted 40px to vh
+  marginLeft: '6vh',
   position: 'relative',
   '&::after': {
     content: '""',
     position: 'absolute',
     left: 0,
-    bottom: '-0.9vh', // Converted 6px to vh
+    bottom: '-0.9vh',
     width: '100%',
-    height: '0.45vh', // Converted 3px to vh
+    height: '0.45vh',
     background: 'white',
     borderRadius: '5px',
     transform: 'scaleX(0)',
@@ -47,15 +47,15 @@ const NavigationButton = styled(Button)({
 });
 
 const LoginButton = styled(Button)({
-  width: '19.5vh', // Converted 130px to vh
-  height: '7vh', // Converted 50px to vh
+  width: '19.5vh',
+  height: '7vh',
   background: 'transparent',
-  border: '2px solid white', // Converted 2px to vh
+  border: '2px solid white',
   borderRadius: '6px',
   fontSize: '1.1em',
   color: 'white',
   fontWeight: 500,
-  marginLeft: '6vh', // Converted 40px to vh
+  marginLeft: '6vh',
   '&:hover': {
     background: 'white',
     color: 'black',
@@ -63,36 +63,24 @@ const LoginButton = styled(Button)({
 });
 
 const RiHeader = () => {
-  const { setAccount } = useContext(AccountContext);
-  const { setPerson, setPage } = useContext(AccountContext);
-  
+  const { setAccount, setPerson, setPage } = useContext(AccountContext);
+
   const logOut = () => {
     setAccount(null);
     setPerson({});
   }
-  const cl1 = () => {
-    setPage(1);
-  }
-  const cl2 = () => {
-    setPage(2);
-  }
-  const cl3 = () => {
-    setPage(3);
-  }
-  const cl4 = () => {
-    setPage(4);
-  }
-  
+
   return (
     <HeaderContainer position="static">
       <Toolbar>
         <Logo src={logo} alt="Logo" />
         <Box className="navigation">
-          <NavigationButton className="ello" onClick={cl1}>Profile</NavigationButton>
-          <NavigationButton className="ello" onClick={cl2}>Contests</NavigationButton>
-          <NavigationButton className="ello" onClick={cl3}>Community</NavigationButton>
-          <NavigationButton className="ello" onClick={cl4}>Chat</NavigationButton>
-          <LoginButton className="bttnlogin" onClick={logOut}>Logout</LoginButton>
+          <NavigationButton onClick={() => setPage(1)}>Profile</NavigationButton>
+          <NavigationButton onClick={() => setPage(2)}>Contests</NavigationButton>
+          <NavigationButton onClick={() => setPage(3)}>Community</NavigationButton>
+          <NavigationButton onClick={() => setPage(4)}>Chat</NavigationButton>
+          <NavigationButton onClick={() => setPage(6)}>Problemset</NavigationButton>  {/* ← New */}
+          <LoginButton onClick={logOut}>Logout</LoginButton>
         </Box>
       </Toolbar>
     </HeaderContainer>

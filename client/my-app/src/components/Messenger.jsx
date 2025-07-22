@@ -1,13 +1,16 @@
 import React, { Fragment, useContext } from "react";
-import { AppBar, Box, Toolbar, styled } from '@mui/material';
+import { AppBar, Box, Toolbar, styled } from "@mui/material";
 import LoginDialog from "./Accounts/LoginDialog";
 import ChatDialog from "./chat/chatdialog";
-import { AccountContext } from "./constants/contexts/AccountProvider"; // imported the context
 import ContestMain from "./Contest/ContestMain";
 import Community from "./Community/Community";
 import EditProfile from "./EditProfile/editProfile";
 import Profile from "./Profile/profile";
-import { createGlobalStyle } from 'styled-components';
+import Problemset from "./Problemset/Problemset";
+import RiHeader from "./Header/Header";   // ← add this
+
+import { AccountContext } from "./constants/contexts/AccountProvider";
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   body, html {
@@ -21,31 +24,28 @@ const GlobalStyle = createGlobalStyle`
 const LoginHeader = styled(AppBar)({
   height: "220px",
   boxShadow: "none",
-  backgroundColor: "black"
+  backgroundColor: "black",
 });
 
 const ChatHeader = styled(AppBar)({
   height: "125px",
   boxShadow: "none",
-  backgroundColor: "black"
+  backgroundColor: "black",
 });
 
 const Component = styled(Box)({
   minHeight: "100vh",
   display: "flex",
-  flexDirection: "column"
+  flexDirection: "column",
 });
 
 const Content = styled(Box)({
   flexGrow: 1,
-  overflowY: "auto"
+  overflowY: "auto",
 });
 
 function Messenger() {
-  const { account } = useContext(AccountContext); // using account variable
-  const { page } = useContext(AccountContext);
-  //const { profile } = useContext(AccountContext);
-
+  const { account, page } = useContext(AccountContext);
 
   function renderComponent() {
     switch (page) {
@@ -59,6 +59,8 @@ function Messenger() {
         return <ChatDialog />;
       case 5:
         return <EditProfile />;
+      case 6:
+        return <Problemset />;
       default:
         return <ContestMain />;
     }
@@ -77,9 +79,12 @@ function Messenger() {
                 </Toolbar>
               </ChatHeader>
             ) : (
-              <Content>
-                {renderComponent()}
-              </Content>
+              <>
++               <RiHeader />           {/* ← header always here */}
+                <Content>
+                  {renderComponent()}
+                </Content>
+              </>
             )}
           </Fragment>
         ) : (
@@ -89,9 +94,7 @@ function Messenger() {
                 <LoginDialog />
               </Toolbar>
             </LoginHeader>
-            <Content>
-              {/* <LoginDialog /> */}
-            </Content>
+            <Content />
           </Fragment>
         )}
       </Component>
